@@ -2,7 +2,9 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <title>Trade Analytics</title>
     <style>
         * {
@@ -16,7 +18,15 @@
             background: #1a1d29;
             color: #e4e6eb;
             line-height: 1.6;
-            padding: 40px 20px;
+            padding: 20px 16px;
+            padding-bottom: max(20px, env(safe-area-inset-bottom));
+            -webkit-font-smoothing: antialiased;
+        }
+
+        @media (min-width: 768px) {
+            body {
+                padding: 40px 20px;
+            }
         }
         
         .container {
@@ -25,16 +35,25 @@
         }
         
         .header {
-            margin-bottom: 48px;
+            margin-bottom: 32px;
             text-align: center;
         }
         
         .header h1 {
-            font-size: 2.5rem;
+            font-size: 2rem;
             font-weight: 600;
             color: #fff;
             margin-bottom: 8px;
             letter-spacing: -0.02em;
+        }
+
+        @media (min-width: 768px) {
+            .header {
+                margin-bottom: 48px;
+            }
+            .header h1 {
+                font-size: 2.5rem;
+            }
         }
         
         .header p {
@@ -53,15 +72,23 @@
         }
         
         .tab {
-            padding: 10px 24px;
+            padding: 12px 20px;
             background: transparent;
             color: #8b92a8;
             border: none;
             cursor: pointer;
-            font-size: 0.95rem;
+            font-size: 0.9rem;
             font-weight: 500;
             border-radius: 8px;
             transition: all 0.2s;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        @media (min-width: 768px) {
+            .tab {
+                padding: 10px 24px;
+                font-size: 0.95rem;
+            }
         }
         
         .tab:hover {
@@ -99,15 +126,24 @@
 
         textarea {
             width: 100%;
-            min-height: 320px;
+            min-height: 280px;
             background: #1a1d29;
             border: 1px solid #2d3348;
             border-radius: 12px;
-            padding: 20px;
+            padding: 16px;
             color: #e4e6eb;
             font-family: 'Monaco', 'Courier New', monospace;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             resize: vertical;
+            -webkit-appearance: none;
+        }
+
+        @media (min-width: 768px) {
+            textarea {
+                min-height: 320px;
+                padding: 20px;
+                font-size: 0.9rem;
+            }
         }
 
         textarea:focus {
@@ -117,16 +153,25 @@
 
         .btn-primary {
             width: 100%;
-            padding: 16px;
+            padding: 18px;
             background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);
             color: white;
             border: none;
             border-radius: 12px;
-            font-size: 1rem;
+            font-size: 1.05rem;
             font-weight: 600;
             cursor: pointer;
             margin-top: 20px;
             transition: all 0.3s;
+            -webkit-tap-highlight-color: transparent;
+            touch-action: manipulation;
+        }
+
+        @media (min-width: 768px) {
+            .btn-primary {
+                padding: 16px;
+                font-size: 1rem;
+            }
         }
 
         .btn-primary:hover {
@@ -138,6 +183,63 @@
             opacity: 0.5;
             cursor: not-allowed;
             transform: none;
+        }
+
+        .btn-secondary {
+            width: 100%;
+            padding: 14px;
+            background: transparent;
+            color: #8b92a8;
+            border: 1px solid #2d3348;
+            border-radius: 12px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            cursor: pointer;
+            margin-top: 12px;
+            transition: all 0.2s;
+            -webkit-tap-highlight-color: transparent;
+            touch-action: manipulation;
+        }
+
+        .btn-secondary:hover {
+            background: #22263a;
+            color: #c4b5fd;
+            border-color: #8b5cf6;
+        }
+
+        .btn-secondary:active {
+            transform: scale(0.98);
+        }
+
+        @media (min-width: 768px) {
+            .btn-secondary {
+                padding: 12px;
+                font-size: 0.85rem;
+            }
+        }
+
+        .btn-export-inline {
+            padding: 8px 16px;
+            background: transparent;
+            color: #8b92a8;
+            border: 1px solid #2d3348;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+            -webkit-tap-highlight-color: transparent;
+            white-space: nowrap;
+        }
+
+        .btn-export-inline:hover {
+            background: #22263a;
+            color: #c4b5fd;
+            border-color: #8b5cf6;
+        }
+
+        .btn-export-inline:active {
+            transform: scale(0.96);
         }
 
         .parsed-preview {
@@ -191,16 +293,31 @@
         /* Analytics Tab */
         .stats-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 24px;
-            margin-bottom: 48px;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+            margin-bottom: 32px;
+        }
+
+        @media (min-width: 768px) {
+            .stats-grid {
+                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+                gap: 24px;
+                margin-bottom: 48px;
+            }
         }
         
         .stat-card {
             background: #22263a;
-            border-radius: 16px;
-            padding: 28px;
+            border-radius: 14px;
+            padding: 20px 16px;
             border: 1px solid #2d3348;
+        }
+
+        @media (min-width: 768px) {
+            .stat-card {
+                border-radius: 16px;
+                padding: 28px;
+            }
         }
         
         .stat-label {
@@ -213,11 +330,17 @@
         }
         
         .stat-value {
-            font-size: 2.75rem;
+            font-size: 2.25rem;
             font-weight: 700;
             color: #fff;
             line-height: 1;
             margin-bottom: 8px;
+        }
+
+        @media (min-width: 768px) {
+            .stat-value {
+                font-size: 2.75rem;
+            }
         }
         
         .stat-value.positive {
@@ -452,6 +575,7 @@ Post-SSL sweep continuation...
 ## What to Refine
 - Wait for retest on large iFVG candles"></textarea>
                 <button class="btn-primary" onclick="parseTrade()">Parse & Add Trade</button>
+                <button class="btn-secondary" onclick="exportTrades()">📸 Export All Trades</button>
             </div>
 
             <div class="parsed-preview hidden" id="previewArea">
@@ -508,7 +632,10 @@ Post-SSL sweep continuation...
                 </div>
             </div>
             
-            <h2 class="section-title">Key Insights</h2>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px;">
+                <h2 class="section-title" style="margin-bottom: 0;">Key Insights</h2>
+                <button class="btn-export-inline" onclick="exportTrades()">📸 Export</button>
+            </div>
             
             <div id="insights-container">
                 <p class="empty-state">Add trades to see insights</p>
@@ -536,7 +663,7 @@ Post-SSL sweep continuation...
         const SUPABASE_URL = 'https://tfnlzweglecubmnvjuvf.supabase.co';
         const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRmbmx6d2VnbGVjdWJtbnZqdXZmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Njg5NjQ0NzAsImV4cCI6MjA4NDU0MDQ3MH0.fnzK7XWtb7yuP51mo20N6q2PZ8c4XpHBWLMslX8NeDE';
 
-        const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+        const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
         // Tab Switching
         function switchTab(tabName) {
@@ -578,7 +705,9 @@ Post-SSL sweep continuation...
                 const [_, assetDir, context, result] = headerMatch;
                 
                 const assetDirLower = assetDir.toLowerCase();
-                trade.asset = assetDirLower.includes('nq') ? 'NQ' : 
+                trade.asset = assetDirLower.includes('mnq') ? 'MNQ' :
+                             assetDirLower.includes('mes') ? 'MES' :
+                             assetDirLower.includes('nq') ? 'NQ' : 
                              assetDirLower.includes('es') ? 'ES' : 'Unknown';
                 trade.direction = assetDirLower.includes('long') ? 'long' : 
                                  assetDirLower.includes('short') ? 'short' : 'unknown';
@@ -598,6 +727,7 @@ Post-SSL sweep continuation...
             
             // Extract setup type
             const setupPatterns = [
+                { pattern: /nested/i, type: 'nested' },
                 { pattern: /post-ssl sweep/i, type: 'post-ssl-sweep' },
                 { pattern: /post-10\s*am/i, type: 'post10am' },
                 { pattern: /pre-10\s*am/i, type: 'pre10am' },
@@ -661,6 +791,7 @@ Post-SSL sweep continuation...
 
         function formatSetupType(type) {
             const formats = {
+                'nested': 'Nested Setup',
                 'post-ssl-sweep': 'Post-SSL Sweep',
                 'post10am': 'Post-10 AM',
                 'pre10am': 'Pre-10 AM',
@@ -712,7 +843,7 @@ Post-SSL sweep continuation...
                 
                 displayPreview(tradeData);
                 
-                const { data, error } = await supabase
+                const { data, error } = await supabaseClient
                     .from('trades')
                     .insert([tradeData])
                     .select();
@@ -738,7 +869,7 @@ Post-SSL sweep continuation...
 
         // Load all trades
         async function getAllTrades() {
-            const { data, error } = await supabase
+            const { data, error } = await supabaseClient
                 .from('trades')
                 .select('*')
                 .order('trade_date', { ascending: false });
@@ -979,6 +1110,46 @@ Post-SSL sweep continuation...
                 
             } catch (error) {
                 console.error('Error loading trades:', error);
+            }
+        }
+
+        // Export all trades as JSON
+        async function exportTrades() {
+            try {
+                const trades = await getAllTrades();
+                
+                if (trades.length === 0) {
+                    alert('No trades to export yet!');
+                    return;
+                }
+                
+                // Create export object with metadata
+                const exportData = {
+                    exported_at: new Date().toISOString(),
+                    total_trades: trades.length,
+                    stats: calculateStats(trades),
+                    trades: trades
+                };
+                
+                // Convert to JSON
+                const jsonString = JSON.stringify(exportData, null, 2);
+                
+                // Create blob and download
+                const blob = new Blob([jsonString], { type: 'application/json' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = `trades-export-${new Date().toISOString().split('T')[0]}.json`;
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+                
+                alert(`✓ Exported ${trades.length} trades successfully!`);
+                
+            } catch (error) {
+                console.error('Error exporting trades:', error);
+                alert('Error exporting trades: ' + error.message);
             }
         }
     </script>
