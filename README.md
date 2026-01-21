@@ -4,25 +4,25 @@ A modern, minimal trade journal and analytics platform built for futures traders
 
 ## Features
 
-### 📊 Performance Analytics
+### Performance Analytics
 - **Win Rate Tracking** - Monitor your overall performance
 - **R-Multiple Analysis** - Track risk-adjusted returns
 - **Setup Type Breakdown** - Identify which setups work best for you
 - **Real-time Stats** - See your edge emerge from the data
 
-### 🎯 Smart Insights
+### Smart Insights
 - **Pattern Recognition** - Automatically identifies what's working
 - **Checklist Compliance** - Tracks discipline vs. outcomes
 - **Edge Discovery** - Highlights your highest-performing setups
 - **Actionable Recommendations** - Get specific guidance based on your data
 
-### 📱 Mobile-First Design
+### Mobile-First Design
 - Optimized for iPhone (and all mobile devices)
 - Touch-friendly interface
 - Safe area support for notch/home indicator
 - Responsive layout adapts to any screen size
 
-### 💾 Data Management
+### Data Management
 - **Cloud Backend** - Secure, scalable database
 - **Export Function** - Download all trades as JSON
 - **Backup & Archive** - Keep snapshots of your data
@@ -130,4 +130,4 @@ Future enhancements being considered:
 
 ---
 
-**Built by a trader, for traders. May your edge be consistent and your drawdowns minimal.** 📈
+**Built by a trader, for traders. May your edge be consistent and your drawdowns minimal.**
